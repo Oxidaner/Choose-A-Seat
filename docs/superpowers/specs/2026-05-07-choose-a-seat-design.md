@@ -28,13 +28,13 @@
 ```json
 {
   "_id": "ObjectId",
-  "name": "string",           // 项目名称，如"XX旅行社-北京一日游"
-  "key": "string",            // 项目唯一标识，6位字母数字，如 "ABC123"
-  "password": "string",       // 参与密码
-  "deadline": "Date",         // 选座截止时间
-  "createdBy": "string",      // 管理员openid
+  "name": "string",
+  "key": "string",
+  "password": "string",
+  "deadline": "Date",
+  "createdBy": "string",
   "createdAt": "Date",
-  "status": "number"          // 0-进行中 1-已结束 2-已归档
+  "status": "number"
 }
 ```
 
@@ -43,20 +43,20 @@
 ```json
 {
   "_id": "ObjectId",
-  "projectId": "string",      // 关联项目ID
-  "name": "string",           // 车辆名称，如"大巴1号"
-  "templateType": "string",   // 座位模板类型
-  "totalSeats": "number",     // 总座位数
+  "projectId": "string",
+  "name": "string",
+  "templateType": "string",
+  "totalSeats": "number",
   "seats": [
     {
-      "id": "string",         // 座位ID，如 "A1", "B2"
-      "label": "string",     // 显示标签，如"左1", "右2"
-      "row": "number",       // 排号，从1开始
-      "col": "number",       // 列号，1-4
-      "isDriver": "boolean", // 是否司机位
-      "isSelectable": "boolean", // 是否可选
-      "status": "number",    // 0-可选 1-已选 2-管理员锁定
-      "userId": "string"     // 选座用户openid（已选时）
+      "id": "string",
+      "label": "string",
+      "row": "number",
+      "col": "number",
+      "isDriver": "boolean",
+      "isSelectable": "boolean",
+      "status": "number",
+      "userId": "string"
     }
   ],
   "createdAt": "Date"
@@ -68,10 +68,10 @@
 ```json
 {
   "_id": "ObjectId",
-  "openid": "string",         // 微信openid，唯一标识
-  "nickname": "string",      // 微信昵称
-  "avatarUrl": "string",     // 头像URL
-  "role": "string",          // admin | user
+  "openid": "string",
+  "nickname": "string",
+  "avatarUrl": "string",
+  "role": "string",
   "createdAt": "Date"
 }
 ```
@@ -84,10 +84,10 @@
   "projectId": "string",
   "vehicleId": "string",
   "seatId": "string",
-  "userId": "string",        // 用户openid
-  "selectedAt": "Date",      // 选座时间
-  "assignedBy": "string",    // 管理员openid（如果是管理员分配的）
-  "status": "number"         // 0-有效 1-已取消
+  "userId": "string",
+  "selectedAt": "Date",
+  "assignedBy": "string",
+  "status": "number"
 }
 ```
 
@@ -97,7 +97,7 @@
 {
   "_id": "ObjectId",
   "userId": "string",
-  "type": "string",          // seat_changed | seat_assigned
+  "type": "string",
   "title": "string",
   "content": "string",
   "read": "boolean",
@@ -114,7 +114,7 @@
 | 车型 | 模板类型 | 布局 | 座位数 |
 |------|----------|------|--------|
 | 5座小车 | sedan | 2+3 | 5 |
-| 7座商务 |商务车 | 2+2+3 | 7 |
+| 7座商务 | 商务车 | 2+2+3 | 7 |
 | 9座车 | van | 2+2+2+3 | 9 |
 | 33座中巴 | mid-bus | 2+2+2+2+... | 33 |
 | 45座大巴 | bus-45 | 2+2+2+2+...+3 | 45 |
@@ -132,16 +132,67 @@
 
 | 状态值 | 含义 | 显示颜色 |
 |--------|------|----------|
-| 0 | 可选 | 绿色 |
-| 1 | 已选（用户自选） | 粉色 |
-| 2 | 管理员锁定/分配 | 橙色 |
-| -1 | 不可选（司机位等） | 灰色 |
+| 0 | 可选 | 绿色 #4CAF50 |
+| 1 | 已选（用户自选） | 粉色 #E91E63 |
+| 2 | 管理员锁定/分配 | 橙色 #FF9800 |
+| -1 | 不可选（司机位等） | 灰色 #DDD |
 
 ---
 
-## 5. 页面结构
+## 5. 移动端适配规范
 
-### 5.1 普通用户页面
+### 5.1 设计原则
+
+- **竖屏优先**：所有页面采用竖屏布局，支持单手操作
+- **触摸友好**：点击热区最小 44×44px，座位格子 48×52px
+- **信息简洁**：每屏只展示核心信息，避免信息过载
+- **操作便捷**：重要操作放在拇指易触及区域
+
+### 5.2 选座页布局（核心页面）
+
+```
+┌────────────────────┐
+│      顶部导航      │  ← 返回、项目名称、车型
+├────────────────────┤
+│     项目信息栏     │  ← 项目名、截止时间
+├────────────────────┤
+│                    │
+│    车头（挡风玻璃） │  ← 固定显示
+│                    │
+│  ┌──┐ ┌──┐ ┌──┐  │
+│  │司机│ │ │ │车门│  │  ← 司机位+车门（不可选）
+│  └──┘ └──┘ └──┘  │
+│                    │
+│  ┌A┐┌B┐  ┌C┐┌D┐   │  ← 座位网格
+│  │ ││ │  │ ││ │   │     左2列 + 过道 + 右2列
+│  └─┘└─┘  └─┘└─┘   │     支持纵向滚动
+│  ┌A┐┌B┐  ┌C┐┌D┐   │
+│  │ ││ │  │ ││ │   │
+│  └─┘└─┘  └─┘└─┘   │
+│       ...          │
+│                    │
+├────────────────────┤
+│   图例（底部）     │  ← 颜色说明
+├────────────────────┤
+│                    │
+│  ┌────────┐ ┌────┐ │  ← 底部操作栏（固定）
+│  │已选座位 │ │确认│ │
+│  │  A3    │ │选座│ │
+│  └────────┘ └────┘ │
+└────────────────────┘
+```
+
+### 5.3 响应式处理
+
+- **竖屏**：标准布局，座位网格纵向滚动
+- **横屏**：提示用户旋转屏幕（小程序不建议支持横屏）
+- **安全区域**：适配 iPhone X 及以上机型的底部安全区
+
+---
+
+## 6. 页面结构
+
+### 6.1 普通用户页面
 
 | 页面 | 路径 | 说明 |
 |------|------|------|
@@ -151,7 +202,7 @@
 | 选座页 | `/pages/seats/seats` | 核心选座界面 |
 | 我的座位 | `/pages/my-seat/my-seat` | 查看已选座位 |
 
-### 5.2 管理员页面
+### 6.2 管理员页面
 
 | 页面 | 路径 | 说明 |
 |------|------|------|
@@ -163,15 +214,15 @@
 
 ---
 
-## 6. 核心 API
+## 7. 核心 API
 
-### 6.1 用户模块
+### 7.1 用户模块
 
 | 云函数 | 参数 | 返回 | 说明 |
 |--------|------|------|------|
 | `getUserInfo` | openid | userInfo | 获取用户信息 |
 
-### 6.2 项目模块
+### 7.2 项目模块
 
 | 云函数 | 参数 | 返回 | 说明 |
 |--------|------|------|------|
@@ -180,7 +231,7 @@
 | `getProject` | projectId | project | 获取项目详情 |
 | `updateProject` | projectId, updates | success | 更新项目 |
 
-### 6.3 车辆模块
+### 7.3 车辆模块
 
 | 云函数 | 参数 | 返回 | 说明 |
 |--------|------|------|------|
@@ -188,7 +239,7 @@
 | `getVehicles` | projectId | vehicles | 获取项目下车辆列表 |
 | `updateVehicle` | vehicleId, updates | success | 更新车辆 |
 
-### 6.4 选座模块
+### 7.4 选座模块
 
 | 云函数 | 参数 | 返回 | 说明 |
 |--------|------|------|------|
@@ -197,7 +248,7 @@
 | `assignSeat` | vehicleId, seatId, userId, adminId | success | 管理员分配座位 |
 | `getSelections` | projectId, userId | selections | 获取用户选座记录 |
 
-### 6.5 通知模块
+### 7.5 通知模块
 
 | 云函数 | 参数 | 返回 | 说明 |
 |--------|------|------|------|
@@ -206,9 +257,9 @@
 
 ---
 
-## 7. 业务流程
+## 8. 业务流程
 
-### 7.1 用户选座流程
+### 8.1 用户选座流程
 
 ```
 1. 用户打开小程序 → 首页
@@ -221,7 +272,7 @@
 8. 截止时间前可取消/改座
 ```
 
-### 7.2 选座冲突处理
+### 8.2 选座冲突处理
 
 ```
 用户A选择座位A1（同时用户B也选择A1）：
@@ -232,7 +283,7 @@
 5. 用户B看到座位变为已选，需要重新选择
 ```
 
-### 7.3 管理员改座流程
+### 8.3 管理员改座流程
 
 ```
 1. 管理员进入座位管理页
@@ -247,7 +298,7 @@
 
 ---
 
-## 8. 安全考虑
+## 9. 安全考虑
 
 1. **用户标识**：使用微信 openid 作为唯一标识，不可伪造
 2. **项目密码**：传输过程 HTTPS 加密，存储时 bcrypt 哈希
@@ -257,9 +308,9 @@
 
 ---
 
-## 9. 部署说明
+## 10. 部署说明
 
-### 9.1 微信小程序部署
+### 10.1 微信小程序部署
 
 1. 在微信公众平台注册小程序账号
 2. 获取 AppID
@@ -267,7 +318,7 @@
 4. 配置服务器域名（request 合法域名）
 5. 提交审核并发布
 
-### 9.2 CloudBase 部署
+### 10.2 CloudBase 部署
 
 1. 注册腾讯云账号，开通 CloudBase
 2. 创建云开发环境
@@ -275,7 +326,7 @@
 4. 配置数据库集合和权限规则
 5. 在小程序中初始化云开发：`wx.cloud.init()`
 
-### 9.3 数据库初始化
+### 10.3 数据库初始化
 
 需要在 CloudBase 控制台或通过云函数创建以下集合：
 - `projects`
@@ -293,7 +344,7 @@
 
 ---
 
-## 10. 项目目录结构
+## 11. 项目目录结构
 
 ```
 Choose-A-Seat/
@@ -326,13 +377,15 @@ Choose-A-Seat/
 │   ├── app.json
 │   └── app.wxss
 ├── docs/                      # 文档目录
-│   └── Choose-A-Seat design document.md
+│   └── superpowers/
+│       └── specs/
+│           └── 2026-05-07-choose-a-seat-design.md
 └── README.md
 ```
 
 ---
 
-## 11. MVP 范围
+## 12. MVP 范围
 
 ### 必须实现（MVP）
 
@@ -355,5 +408,6 @@ Choose-A-Seat/
 
 ---
 
-*文档版本：v1.0*
+*文档版本：v1.1*
 *创建日期：2026-05-07*
+*更新：添加移动端适配规范*
