@@ -1,0 +1,30 @@
+<!-- miniprogram/pages/verify/verify.wxml -->
+<view class="container">
+  <view class="header">
+    <view class="key-display">{{key}}</view>
+    <view class="label">项目Key</view>
+  </view>
+
+  <view class="content">
+    <view class="card">
+      <view class="card-title">输入项目密码</view>
+
+      <input
+        class="password-input"
+        type="text"
+        password
+        placeholder="请输入参与密码"
+        value="{{password}}"
+        bindinput="onPasswordInput"
+      />
+    </view>
+
+    <button
+      class="btn-primary"
+      bindtap="onVerify"
+      disabled="{{!password}}"
+    >
+      {{loading ? '验证中...' : '确认加入'}}
+    </button>
+  </view>
+</view>

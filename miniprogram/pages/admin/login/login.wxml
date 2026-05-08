@@ -1,0 +1,27 @@
+<!-- miniprogram/pages/admin/login/login.wxml -->
+<view class="container">
+  <view class="header">
+    <view class="admin-icon">🔐</view>
+    <view class="title">管理员登录</view>
+    <view class="subtitle">输入管理员密钥进入管理后台</view>
+  </view>
+
+  <view class="content">
+    <input
+      class="key-input"
+      type="text"
+      password
+      placeholder="请输入管理员密钥"
+      value="{{adminKey}}"
+      bindinput="onAdminKeyInput"
+    />
+
+    <button
+      class="btn-primary"
+      bindtap="onLogin"
+      disabled="{{!adminKey}}"
+    >
+      {{loading ? '登录中...' : '登录'}}
+    </button>
+  </view>
+</view>

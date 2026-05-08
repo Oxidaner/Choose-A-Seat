@@ -1,0 +1,32 @@
+<!-- miniprogram/pages/index/index.wxml -->
+<view class="container">
+  <view class="header">
+    <view class="logo">🚌</view>
+    <view class="title">Choose-A-Seat</view>
+    <view class="subtitle">大巴选座系统</view>
+  </view>
+
+  <view class="content">
+    <view class="card">
+      <view class="card-title">加入项目</view>
+      <view class="card-desc">输入项目key进入选座</view>
+
+      <input
+        class="key-input"
+        type="text"
+        maxlength="6"
+        placeholder="请输入6位项目key"
+        value="{{key}}"
+        bindinput="onKeyInput"
+      />
+    </view>
+
+    <button
+      class="btn-primary"
+      bindtap="onJoinProject"
+      disabled="{{key.length !== 6}}"
+    >
+      下一步
+    </button>
+  </view>
+</view>

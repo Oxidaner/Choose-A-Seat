@@ -1,0 +1,29 @@
+<!-- miniprogram/pages/admin/projects/list.wxml -->
+<view class="container">
+  <view class="header">
+    <view class="title">项目管理</view>
+    <button class="create-btn" bindtap="onCreateProject">+ 创建项目</button>
+  </view>
+
+  <view class="project-list">
+    <view
+      class="project-card"
+      wx:for="{{projects}}"
+      wx:key="_id"
+      bindtap="onProjectTap"
+      data-project="{{item}}"
+    >
+      <view class="project-name">{{item.name}}</view>
+      <view class="project-key">Key: {{item.key}}</view>
+      <view class="project-status">
+        <text class="status-tag {{item.status === 0 ? 'active' : 'ended'}}">
+          {{item.status === 0 ? '进行中' : '已结束'}}
+        </text>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && projects.length === 0}}">
+    <view class="empty-text">暂无项目</view>
+  </view>
+</view>

@@ -1,0 +1,28 @@
+<!-- miniprogram/components/seat-grid/seat-grid.wxml -->
+<view class="seat-grid">
+  <!-- 车头 -->
+  <view class="bus-front">
+    <view class="front-label">🚐 挡风玻璃</view>
+  </view>
+
+  <!-- 司机位 -->
+  <view class="driver-area">
+    <view class="driver-seat disabled">🚌 司机</view>
+    <view class="aisle-space"></view>
+    <view class="door disabled">🚪 车门</view>
+  </view>
+
+  <!-- 座位网格 -->
+  <view class="seats-container">
+    <view class="seat-row" wx:for="{{seats}}" wx:for-item="seat" wx:key="id">
+      <view
+        class="seat {{seat.status !== 0 ? 'disabled' : ''}} {{seat.userId ? 'occupied' : ''}}"
+        style="{{getSeatStyle(seat)}}"
+        bindtap="onSeatTap"
+        data-seat="{{seat}}"
+      >
+        <text class="seat-id">{{getSeatText(seat)}}</text>
+      </view>
+    </view>
+  </view>
+</view>

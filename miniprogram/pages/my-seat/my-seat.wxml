@@ -1,0 +1,34 @@
+<!-- miniprogram/pages/my-seat/my-seat.wxml -->
+<view class="container">
+  <view class="header">
+    <view class="title">我的座位</view>
+  </view>
+
+  <view class="selection-list">
+    <view class="selection-card" wx:for="{{selections}}" wx:key="_id">
+      <view class="selection-main">
+        <view class="seat-id">{{item.seatId}}</view>
+        <view class="seat-position">{{getSeatLabel(item.seatId)}}</view>
+      </view>
+      <view class="selection-meta">
+        <view class="project-name">{{item.projectName}}</view>
+        <view class="vehicle-name">{{item.vehicleName}}</view>
+        <view class="select-time">{{item.selectedAt}}</view>
+      </view>
+      <button
+        class="cancel-btn"
+        bindtap="onCancelSeat"
+        data-vehicle-id="{{item.vehicleId}}"
+        data-seat-id="{{item.seatId}}"
+      >
+        取消座位
+      </button>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && selections.length === 0}}">
+    <view class="empty-icon">🪑</view>
+    <view class="empty-text">暂无选座记录</view>
+    <view class="empty-hint">去首页选择项目加入吧</view>
+  </view>
+</view>

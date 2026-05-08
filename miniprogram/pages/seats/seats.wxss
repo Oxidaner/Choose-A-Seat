@@ -1,0 +1,95 @@
+/* miniprogram/pages/seats/seats.wxss */
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f5;
+}
+
+.project-bar {
+  background: #2196F3;
+  padding: 24rpx 30rpx;
+}
+
+.project-name {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.vehicle-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: white;
+  margin-top: 6rpx;
+}
+
+.seat-scroll {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 30rpx;
+  padding: 30rpx;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.legend-color {
+  width: 28rpx;
+  height: 28rpx;
+  border-radius: 6rpx;
+}
+
+.bottom-bar {
+  background: white;
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  gap: 30rpx;
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.selected-info {
+  flex: 1;
+}
+
+.selected-label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.selected-seat {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #2196F3;
+}
+
+.selected-position {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.confirm-btn {
+  width: 240rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #2196F3;
+  color: white;
+  border-radius: 44rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.confirm-btn[disabled] {
+  background: #ccc;
+}

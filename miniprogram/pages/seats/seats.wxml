@@ -1,0 +1,56 @@
+<!-- miniprogram/pages/seats/seats.wxml -->
+<view class="container">
+  <!-- 项目信息 -->
+  <view class="project-bar">
+    <view class="project-name">{{project.name}}</view>
+    <view class="vehicle-name">{{vehicle.name}}</view>
+  </view>
+
+  <!-- 座位网格 -->
+  <scroll-view scroll-y class="seat-scroll">
+    <seat-grid
+      seats="{{seats}}"
+      selectedSeat="{{selectedSeat}}"
+      bind:select="onSeatSelect"
+    />
+
+    <!-- 图例 -->
+    <view class="legend">
+      <view class="legend-item">
+        <view class="legend-color" style="background: #4CAF50"></view>
+        <text>可选</text>
+      </view>
+      <view class="legend-item">
+        <view class="legend-color" style="background: #E91E63"></view>
+        <text>已选</text>
+      </view>
+      <view class="legend-item">
+        <view class="legend-color" style="background: #FF9800"></view>
+        <text>分配</text>
+      </view>
+      <view class="legend-item">
+        <view class="legend-color" style="background: #ddd"></view>
+        <text>不可选</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="selected-info" wx:if="{{selectedSeat}}">
+      <view class="selected-label">已选座位</view>
+      <view class="selected-seat">{{selectedSeat.id}}</view>
+      <view class="selected-position">{{getSeatLabel(selectedSeat.id)}}</view>
+    </view>
+    <view class="selected-info" wx:else>
+      <view class="selected-label">请选择座位</view>
+    </view>
+    <button
+      class="confirm-btn"
+      bindtap="onConfirmSelect"
+      disabled="{{!selectedSeat || loading}}"
+    >
+      {{loading ? '确认中...' : '确认选座'}}
+    </button>
+  </view>
+</view>

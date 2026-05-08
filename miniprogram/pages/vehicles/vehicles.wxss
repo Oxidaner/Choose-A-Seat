@@ -1,0 +1,89 @@
+/* miniprogram/pages/vehicles/vehicles.wxss */
+.container {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+.project-info {
+  background: #2196F3;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.project-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: white;
+}
+
+.project-deadline {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 10rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 20rpx;
+  padding-left: 10rpx;
+}
+
+.vehicle-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.vehicle-card {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.vehicle-icon {
+  font-size: 60rpx;
+  margin-right: 24rpx;
+}
+
+.vehicle-info {
+  flex: 1;
+}
+
+.vehicle-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.vehicle-seats {
+  font-size: 26rpx;
+  color: #999;
+  margin-top: 6rpx;
+}
+
+.vehicle-arrow {
+  font-size: 48rpx;
+  color: #ccc;
+}
+
+.empty {
+  text-align: center;
+  padding: 100rpx 0;
+}
+
+.empty-icon {
+  font-size: 100rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+}

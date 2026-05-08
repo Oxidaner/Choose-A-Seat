@@ -1,0 +1,33 @@
+<!-- miniprogram/pages/vehicles/vehicles.wxml -->
+<view class="container">
+  <view class="project-info">
+    <view class="project-name">{{project.name}}</view>
+    <view class="project-deadline" wx:if="{{project.deadline}}">
+      截止时间：{{project.deadline}}
+    </view>
+  </view>
+
+  <view class="section-title">选择车辆</view>
+
+  <view class="vehicle-list">
+    <view
+      class="vehicle-card"
+      wx:for="{{vehicles}}"
+      wx:key="_id"
+      bindtap="onSelectVehicle"
+      data-vehicle="{{item}}"
+    >
+      <view class="vehicle-icon">🚌</view>
+      <view class="vehicle-info">
+        <view class="vehicle-name">{{item.name}}</view>
+        <view class="vehicle-seats">{{item.totalSeats}}座</view>
+      </view>
+      <view class="vehicle-arrow">›</view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{vehicles.length === 0}}">
+    <view class="empty-icon">🚗</view>
+    <view class="empty-text">暂无可用车辆</view>
+  </view>
+</view>
