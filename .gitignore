@@ -1,0 +1,6 @@
+# Git worktrees
+.worktrees/
+worktrees/
+
+# Superpowers
+.superpowers/
