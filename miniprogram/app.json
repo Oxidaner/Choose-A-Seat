@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/verify/verify",
+    "pages/vehicles/vehicles",
+    "pages/seats/seats",
+    "pages/my-seat/my-seat",
+    "pages/admin/login/login",
+    "pages/admin/projects/list",
+    "pages/admin/projects/detail",
+    "pages/admin/vehicles/list",
+    "pages/admin/seats/seats"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2196F3",
+    "navigationBarTitleText": "Choose-A-Seat",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#2196F3",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/my-seat/my-seat",
+        "text": "我的座位"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
