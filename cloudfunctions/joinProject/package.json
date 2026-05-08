@@ -1,0 +1,10 @@
+{
+  "name": "joinProject",
+  "version": "1.0.0",
+  "description": "通过key和密码加入项目",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3",
+    "bcryptjs": "^2.4.3"
+  }
+}
